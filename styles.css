@@ -9,20 +9,26 @@
 [data-cell] {
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 50%; /* or set a specific size like 50% */
+    background-size: 50%;
+}
+
+html, body {
+    overflow: hidden;
+    height: 100%;
 }
 
 body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #222;
     color: #f1f1f1;
 }
 
 .container {
     text-align: center;
+    padding: 20px;
 }
 
 /* Money display styling */
@@ -41,7 +47,7 @@ body {
     margin-bottom: 20px;
 }
 
-/* Game board styling */
+/* Game board styling for PC */
 .game-board {
     display: grid;
     grid-template-columns: repeat(5, 100px);
@@ -133,6 +139,21 @@ body {
     width: 200px;
 }
 
-#betButton:hover, #betAmount:focus {
+#betButton:hover,
+#betAmount:focus {
     background-color: #444;
+}
+
+/* Mobile-Specific Styling */
+@media (max-width: 768px) {
+    .game-board {
+        grid-template-columns: repeat(5, 60px); /* 5 columns */
+        grid-gap: 10px; /* Smaller gap between cells */
+    }
+
+    .cell {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem; /* Adjust font size for smaller cells */
+    }
 }
