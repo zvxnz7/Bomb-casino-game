@@ -69,6 +69,7 @@ function handleClick(e) {
     const cellIndex = Array.from(cells).indexOf(cell);
 
     if (array[cellIndex] == 1) { // Bomb cell
+        betButton.textContent = 'Place bets';
         cells.forEach((cell, index) => {
             if (array[index] == 1) {
                 cell.style.backgroundImage = "url('bomb.png')";
