@@ -3,6 +3,7 @@ const cells = document.querySelectorAll('[data-cell]');
 const betButton = document.getElementById('betButton');
 
 let money = 1000;
+let multiplier = 1;
 let array = []; // Declare array globally
 let mines = 5;
 let time = 0;
@@ -29,6 +30,10 @@ function generateArray() {
 
 function updateMoneyDisplay() {
     document.getElementById("moneyAmount").innerText = money;
+}
+
+function updateMltplierDisplay() {
+document.getElementById("multiplier").innerText = multiplier;
 }
 
 updateMoneyDisplay();
