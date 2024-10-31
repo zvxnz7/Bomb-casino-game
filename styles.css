@@ -144,8 +144,11 @@ body {
     background-color: #444;
 }
 
-#mltiplierText {
-    font-size: 1.5rem;
+.mltiplier-display {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: #f1f1f1;
+    text-align: center;
 }
     
 /* Mobile-Specific Styling */
