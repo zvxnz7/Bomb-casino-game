@@ -53,15 +53,7 @@ betButton.addEventListener("click", function () {
             alert("Invalid bet amount or insufficient funds.");
         }
     } else {
-       cells.forEach((cell, index) => {
-            if (array[index] == 1) {
-                cell.style.backgroundImage = "url('bomb.png')";
-                cell.classList.add('red');
-            } else {
-                cell.style.backgroundImage = "url('gem.png')";
-                cell.classList.add('blue');
-            }
-        });
+        revealBombs();
         const payout = betAmount * multiplier;
         money += payout;
         updateMoneyDisplay();
@@ -69,6 +61,18 @@ betButton.addEventListener("click", function () {
         betButton.textContent = 'Place bets';
     }
 });
+
+function revealBombs(){
+    cells.forEach((cell, index) => {
+        if (array[index] == 1) {
+            cell.style.backgroundImage = "url('bomb.png')";
+            cell.classList.add('red');
+        } else {
+            cell.style.backgroundImage = "url('gem.png')";
+            cell.classList.add('blue');
+        }
+    });
+}
 
 function handleClick(e) {
     if (!gameStarted) return;
