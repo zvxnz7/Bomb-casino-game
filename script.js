@@ -26,7 +26,6 @@ function generateArray() {
         cell.textContent = '';
         cell.style.backgroundColor = '';
         cell.style.backgroundImage = '';
-        cell.addEventListener('click', handleClick); // Re-enable clicks for new game
     });
     updateMltplierDisplay();
 }
@@ -66,12 +65,10 @@ function handleClick(e) {
     if (!gameStarted) return;
 
     const cell = e.target;
-
     // Prevent clicking on already-clicked cells
     if (cell.classList.contains('win') || cell.classList.contains('red') || cell.classList.contains('blue')) {
         return;
     }
-
     const cellIndex = Array.from(cells).indexOf(cell);
 
     if (array[cellIndex] == 1) { // Bomb cell
@@ -84,7 +81,6 @@ function handleClick(e) {
                 cell.style.backgroundImage = "url('gem.png')";
                 cell.classList.add('blue');
             }
-            cell.removeEventListener('click', handleClick); // Disable clicking after game ends
         });
         gameStarted = false;
     } else { // Safe cell
@@ -93,7 +89,6 @@ function handleClick(e) {
         time++;
         multiplier = calculateMultiplier(time);
         updateMltplierDisplay();
-        cell.removeEventListener('click', handleClick); // Disable clicking on this cell
     }
 }
 
