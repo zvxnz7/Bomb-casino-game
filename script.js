@@ -42,6 +42,7 @@ betButton.addEventListener("click", function () {
             updateMoneyDisplay(); 
             console.log("Array generated with bet amount:", betAmount);
             generateArray();
+            betButton.textContent = 'Payout';
         } else {
             alert("Invalid bet amount or insufficient funds.");
         }
@@ -51,6 +52,7 @@ betButton.addEventListener("click", function () {
         money += payout;
         updateMoneyDisplay();
         gameStarted = false;  // Reset game state
+        betButton.textContent = 'Place bets';
     }
 });
 
