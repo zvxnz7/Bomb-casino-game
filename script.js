@@ -59,6 +59,8 @@ betButton.addEventListener("click", function () {
         updateMoneyDisplay();
         gameStarted = false;
         betButton.textContent = 'Place bets';
+
+        // Reveal all cells at the end of the game
         cells.forEach((cell, index) => {
             if (array[index] == 1) {
                 cell.style.backgroundImage = "url('bomb.png')";
@@ -67,6 +69,8 @@ betButton.addEventListener("click", function () {
                 cell.style.backgroundImage = "url('gem.png')";
                 cell.classList.add('blue');
             }
+            cell.removeEventListener('click', handleClick); // Disable clicking after game ends
+        });
     }
 });
 
