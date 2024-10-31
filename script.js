@@ -16,11 +16,13 @@ function generateArray() {
     multiplier = 1; // Reset multiplier at the start of each game
     gameStarted = true;
 
+    // Shuffle the array
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
 
+    // Reset cells for new game
     cells.forEach((cell) => {
         cell.classList.remove('win', 'red', 'blue', 'gameover');
         cell.textContent = '';
@@ -28,15 +30,33 @@ function generateArray() {
         cell.style.backgroundImage = '';
         cell.addEventListener('click', handleClick); // Re-enable clicks for new game
     });
-    updateMltplierDisplay();
+    updateMultiplierDisplay();
 }
 
 function updateMoneyDisplay() {
     document.getElementById("moneyAmount").innerText = money;
 }
 
-function updateMltplierDisplay() {
+function updateMultiplierDisplay() {
     document.getElementById("multiplier").innerText = multiplier;
+}
+
+function revealCells() {
+    cells.forEach((cell, index) => {
+        if (array[index] == 1) {
+            cell.style.backgroundImage = "url('bomb.png')";
+            cell.classList.add('red');
+        } else {
+            cell.style.backgroundImage = "url('gem.png')";
+            cell.classList.add('blue');
+        }
+        cell.removeEventListener('click', handleClick); // Disable clicking after game ends
+    });
+}
+
+function calculateMultiplier(time) {
+    if (time === 0) return 0;
+    return parseFloat((0.83 * Math.pow(1.32, time)).toFixed(2));
 }
 
 updateMoneyDisplay();
@@ -59,18 +79,7 @@ betButton.addEventListener("click", function () {
         updateMoneyDisplay();
         gameStarted = false;
         betButton.textContent = 'Place bets';
-
-        // Reveal all cells at the end of the game
-        cells.forEach((cell, index) => {
-            if (array[index] == 1) {
-                cell.style.backgroundImage = "url('bomb.png')";
-                cell.classList.add('red');
-            } else {
-                cell.style.backgroundImage = "url('gem.png')";
-                cell.classList.add('blue');
-            }
-            cell.removeEventListener('click', handleClick); // Disable clicking after game ends
-        });
+        revealCells();
     }
 });
 
@@ -78,35 +87,20 @@ function handleClick(e) {
     if (!gameStarted) return;
 
     const cell = e.target;
-
     const cellIndex = Array.from(cells).indexOf(cell);
 
     if (array[cellIndex] == 1) { // Bomb cell
-        betButton.textContent = 'Place bets';
-        cells.forEach((cell, index) => {
-            if (array[index] == 1) {
-                cell.style.backgroundImage = "url('bomb.png')";
-                cell.classList.add('red');
-            } else {
-                cell.style.backgroundImage = "url('gem.png')";
-                cell.classList.add('blue');
-            }
-            cell.removeEventListener('click', handleClick); // Disable clicking after game ends
-        });
         gameStarted = false;
+        betButton.textContent = 'Place bets';
+        revealCells();
     } else { // Safe cell
         cell.style.backgroundImage = "url('gem.png')";
         cell.classList.add('win');
         time++;
         multiplier = calculateMultiplier(time);
-        updateMltplierDisplay();
+        updateMultiplierDisplay();
         cell.removeEventListener('click', handleClick); // Disable clicking on this cell
     }
-}
-
-function calculateMultiplier(time) {
-    if (time === 0) return 0;
-    return (0.83 * Math.pow(1.32, time)).toFixed(2);
 }
 
 cells.forEach(cell => cell.addEventListener('click', handleClick));
