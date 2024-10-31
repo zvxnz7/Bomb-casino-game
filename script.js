@@ -53,13 +53,15 @@ betButton.addEventListener("click", function () {
             alert("Invalid bet amount or insufficient funds.");
         }
     } else {
-        if (array[index] == 1) {
-            cell.style.backgroundImage = "url('bomb.png')";
-            cell.classList.add('red');
-        } else {
-            cell.style.backgroundImage = "url('gem.png')";
-            cell.classList.add('blue');
-        }
+       cells.forEach((cell, index) => {
+            if (array[index] == 1) {
+                cell.style.backgroundImage = "url('bomb.png')";
+                cell.classList.add('red');
+            } else {
+                cell.style.backgroundImage = "url('gem.png')";
+                cell.classList.add('blue');
+            }
+        });
         const payout = betAmount * multiplier;
         money += payout;
         updateMoneyDisplay();
