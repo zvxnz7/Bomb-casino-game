@@ -81,7 +81,7 @@ function handleClick(e) {
 
 function calculateMultiplier(mines, time) {
     if (time == 0) {return 0;}
-    return (83 * Math.pow(1.32, time)).toFixed(2);  // Adjust multiplier based on time (successful steps)
+    return (0.83 * Math.pow(1.32, time)).toFixed(2);  // Adjust multiplier based on time (successful steps)
 }
 
 cells.forEach(cell => cell.addEventListener('click', handleClick));
