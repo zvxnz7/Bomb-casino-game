@@ -79,7 +79,6 @@ betButton.addEventListener("click", function () {
         updateMoneyDisplay();
         gameStarted = false;
         betButton.textContent = 'Place bets';
-        revealCells();
     }
 });
 
