@@ -53,7 +53,9 @@ betButton.addEventListener("click", function () {
         }
     } else {
         // If the game is already started, pay out winnings
-        const payout = betAmount * calculateMultiplier(mines, time);
+        const payout = betAmount * calculateMultiplier(time);
+updateMltplierDisplay();
+
         money += payout;
         updateMoneyDisplay();
         gameStarted = false;  // Reset game state
@@ -87,10 +89,9 @@ function handleClick(e) {
     }
 }
 
-function calculateMultiplier(mines, time) {
+function calculateMultiplier(time) {
     if (time == 0) {return 0;}
-    multiplier = (0.83 * Math.pow(1.32, time)).toFixed(2);  // Adjust multiplier based on time (successful steps)
-updateMltplierDisplay();
+    multiplier = (0.83 * Math.pow(1.32, time)).toFixed(2);
 return (multiplier);
 }
 
