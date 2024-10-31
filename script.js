@@ -26,6 +26,9 @@ function generateArray() {
         cell.textContent = '';
         cell.style.backgroundColor = '';
         cell.style.backgroundImage = '';
+
+        // Add this line to ensure each cell listens for a click event
+        cell.addEventListener("click", handleClick);
     });
     updateMltplierDisplay();
 }
