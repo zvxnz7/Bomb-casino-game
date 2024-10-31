@@ -59,6 +59,14 @@ betButton.addEventListener("click", function () {
         updateMoneyDisplay();
         gameStarted = false;
         betButton.textContent = 'Place bets';
+        cells.forEach((cell, index) => {
+            if (array[index] == 1) {
+                cell.style.backgroundImage = "url('bomb.png')";
+                cell.classList.add('red');
+            } else {
+                cell.style.backgroundImage = "url('gem.png')";
+                cell.classList.add('blue');
+            }
     }
 });
 
@@ -66,11 +74,6 @@ function handleClick(e) {
     if (!gameStarted) return;
 
     const cell = e.target;
-
-    // Prevent clicking on already-clicked cells
-    if (cell.classList.contains('win') || cell.classList.contains('red') || cell.classList.contains('blue')) {
-        return;
-    }
 
     const cellIndex = Array.from(cells).indexOf(cell);
 
