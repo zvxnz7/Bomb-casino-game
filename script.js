@@ -65,6 +65,12 @@ function handleClick(e) {
     if (!gameStarted) return;
 
     const cell = e.target;
+
+    // Prevent clicking on already-clicked cells
+    if (cell.classList.contains('win') || cell.classList.contains('red') || cell.classList.contains('blue')) {
+        return;
+    }
+
     const cellIndex = Array.from(cells).indexOf(cell);
 
     if (array[cellIndex] == 1) { // Bomb cell
