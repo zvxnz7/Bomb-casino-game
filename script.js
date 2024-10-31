@@ -59,10 +59,6 @@ betButton.addEventListener("click", function () {
         updateMoneyDisplay();
         gameStarted = false;
         betButton.textContent = 'Place bets';
-
-
-            cell.removeEventListener('click', handleClick); // Disable clicking after game ends
-        });
     }
 });
 
@@ -70,6 +66,11 @@ function handleClick(e) {
     if (!gameStarted) return;
 
     const cell = e.target;
+
+    // Prevent clicking on already-clicked cells
+    if (cell.classList.contains('win') || cell.classList.contains('red') || cell.classList.contains('blue')) {
+        return;
+    }
 
     const cellIndex = Array.from(cells).indexOf(cell);
 
@@ -100,5 +101,3 @@ function calculateMultiplier(time) {
     if (time === 0) return 0;
     return (0.83 * Math.pow(1.32, time)).toFixed(2);
 }
-
-cells.forEach(cell => cell.addEventListener('click', handleClick));
